@@ -9,15 +9,16 @@
 - [License](#license)
 
 ## Introduction
-This project deploys a Google Cloud infrastructure using Terraform to create vpc-peering .
+This project deploys a Google Cloud infrastructure using Terraform to create VPC-PEERING.
 ## Usage
-This section configures a compute instance. It specifies the name, environment, project, instance tags, machine type, GCP zone, service account scopes, subnetwork (retrieved from the subnet module), and SSH keys for access.
-
+To use this module, you should have Terraform installed and configured for GCP. This module provides the necessary Terraform configuration for creating GCP resources, and you can customize the inputs as needed. Below is an example of how to use this module:
+ 
+# Example: vpc-peering
 ```hcl
-module "peering1" {
+module "peering" {
   source        = "git::https://github.com/opz0/terraform-gcp-vpc-peering.git?ref=v1.0.0"
-  vpc_1_name    = "app-test-vpc1"
-  vpc_2_name    = "app5-testq-vpc"
+  vpc_1_name    = "test"
+  vpc_2_name    = "test1"
   local_network = data.google_compute_network.my-network.self_link
   peer_network  = data.google_compute_network.my-network1.self_link
 }
@@ -33,6 +34,7 @@ You can customize the input variables according to your specific requirements.
 
 ## Module Outputs
 Each module may have specific outputs. You can retrieve these outputs by referencing the module in your Terraform configuration.
+
 - 'local_network_peering' Network peering resource.
 - 'peer_network_peering': Peer network peering resource.
 - 'complete' : Output to be used as a module dependency.
