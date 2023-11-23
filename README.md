@@ -42,7 +42,7 @@ Each module may have specific outputs. You can retrieve these outputs by referen
 - 'state_details' : Details about the current state of the peering.
 
 ## Examples
-For detailed examples on how to use this module, please refer to the 'examples' directory within this repository.
+For detailed examples on how to use this module, please refer to the '[examples](https://github.com/cypik/terraform-gcp-vpc-peering/blob/master/example)' directory within this repository.
 
 ## Author
 Your Name Replace '[License Name]' and '[Your Name]' with the appropriate license and your information. Feel free to expand this README with additional details or usage instructions as needed for your specific use case.
