@@ -9,7 +9,7 @@
 - [License](#license)
 
 ## Introduction
-This project deploys a Google Cloud infrastructure using Terraform to create **Vpc-Peering**.
+This project deploys a Google Cloud infrastructure using Terraform to create Vpc-Peering.
 ## Usage
 To use this module, you should have Terraform installed and configured for GCP. This module provides the necessary Terraform configuration for creating GCP resources, and you can customize the inputs as needed. Below is an example of how to use this module:
 
