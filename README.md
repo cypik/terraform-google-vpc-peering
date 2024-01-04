@@ -1,4 +1,4 @@
-# terraform-gcp-vpc-peering
+# Terraform-gcp-vpc-peering
 # Google Cloud Infrastructure Provisioning with Terraform
 ## Table of Contents
 
@@ -9,7 +9,7 @@
 - [License](#license)
 
 ## Introduction
-This project deploys a Google Cloud infrastructure using Terraform to create **VPC-PEERING**.
+This project deploys a Google Cloud infrastructure using Terraform to create **Vpc-Peering**.
 ## Usage
 To use this module, you should have Terraform installed and configured for GCP. This module provides the necessary Terraform configuration for creating GCP resources, and you can customize the inputs as needed. Below is an example of how to use this module:
 
@@ -43,7 +43,7 @@ Each module may have specific outputs. You can retrieve these outputs by referen
 - `state_details` : Details about the current state of the peering.
 
 ## Examples
-For detailed examples on how to use this module, please refer to the [EXAMPLES](https://github.com/cypik/terraform-gcp-vpc-peering/tree/master/example) directory within this repository.
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/cypik/terraform-gcp-vpc-peering/tree/master/example) directory within this repository.
 
 ## Author
 Your Name Replace **'[License Name]'** and **'[Your Name]'** with the appropriate license and your information. Feel free to expand this README with additional details or usage instructions as needed for your specific use case.
