@@ -5,10 +5,10 @@ provider "google" {
 }
 
 data "google_compute_network" "my-network" {
-  name = "test"
+  name = "default"
 }
 data "google_compute_network" "my-network1" {
-  name = "test1"
+  name = "test-test-vpc"
 }
 
 #####==============================================================================

@@ -43,6 +43,7 @@ variable "stack_type" {
   type        = string
   default     = "IPV4_ONLY"
 }
+
 variable "vpc_1_name" {
   type        = string
   default     = ""
