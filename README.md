@@ -21,9 +21,10 @@ To use this module, you should have Terraform installed and configured for GCP. 
 ```hcl
 module "peering" {
   source        = "cypik/vpc-peering/google"
-  version       = "1.0.1"
-  vpc_1_name    = "test"
-  vpc_2_name    = "test1"
+  version       = "1.0.2"
+  vpc_1_name    = "app"
+  vpc_2_name    = "app1"
+  environment   = "test"
   local_network = data.google_compute_network.my-network.self_link
   peer_network  = data.google_compute_network.my-network1.self_link
 }
@@ -45,22 +46,24 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.6 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.50, < 5.11.0 |
-| <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.2 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.9.5 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >=6.1.0 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.3 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >= 3.50, < 5.11.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.2.2 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.6.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | >=6.1.0 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.2.3 |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.6.3 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_labels"></a> [labels](#module\_labels) | cypik/labels/google | 1.0.2 |
 
 ## Resources
 
@@ -68,22 +71,28 @@ No modules.
 |------|------|
 | [google_compute_network_peering.local_network_peering](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering) | resource |
 | [google_compute_network_peering.peer_network_peering](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering) | resource |
-| [null_resource.complete](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
-| [null_resource.module_depends_on](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
+| [null_resource.complete](https://registry.terraform.io/providers/hashicorp/null/3.2.3/docs/resources/resource) | resource |
+| [null_resource.module_depends_on](https://registry.terraform.io/providers/hashicorp/null/3.2.3/docs/resources/resource) | resource |
 | [random_string.network_peering_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment (e.g. `prod`, `dev`, `staging`). | `string` | `""` | no |
 | <a name="input_export_local_custom_routes"></a> [export\_local\_custom\_routes](#input\_export\_local\_custom\_routes) | Export custom routes to peer network from local network. | `bool` | `false` | no |
 | <a name="input_export_local_subnet_routes_with_public_ip"></a> [export\_local\_subnet\_routes\_with\_public\_ip](#input\_export\_local\_subnet\_routes\_with\_public\_ip) | Export custom routes to peer network from local network (defaults to true; causes the Local Peering Connection to align with the [provider default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering#export_subnet_routes_with_public_ip), and the Remote Peering Connection to be opposite the provider default). | `bool` | `true` | no |
 | <a name="input_export_peer_custom_routes"></a> [export\_peer\_custom\_routes](#input\_export\_peer\_custom\_routes) | Export custom routes to local network from peer network. | `bool` | `false` | no |
 | <a name="input_export_peer_subnet_routes_with_public_ip"></a> [export\_peer\_subnet\_routes\_with\_public\_ip](#input\_export\_peer\_subnet\_routes\_with\_public\_ip) | Export custom routes to local network from peer network (defaults to false; causes the Local Peering Connection to align with the [provider default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering#import_subnet_routes_with_public_ip), and the Remote Peering Connection to be opposite the provider default). | `bool` | `false` | no |
+| <a name="input_extra_tags"></a> [extra\_tags](#input\_extra\_tags) | Additional tags for the resource. | `map(string)` | `{}` | no |
+| <a name="input_label_order"></a> [label\_order](#input\_label\_order) | Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] . | `list(string)` | <pre>[<br>  "name",<br>  "environment"<br>]</pre> | no |
 | <a name="input_local_network"></a> [local\_network](#input\_local\_network) | Resource link of the network to add a peering to. | `string` | n/a | yes |
+| <a name="input_managedby"></a> [managedby](#input\_managedby) | ManagedBy, eg 'info@cypik.com' | `string` | `"info@cypik.com"` | no |
 | <a name="input_module_depends_on"></a> [module\_depends\_on](#input\_module\_depends\_on) | List of modules or resources this module depends on. | `list(any)` | `[]` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name of the resource. Provided by the client when the resource is created. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | <a name="input_peer_network"></a> [peer\_network](#input\_peer\_network) | Resource link of the peer network. | `string` | n/a | yes |
 | <a name="input_peering_enabled"></a> [peering\_enabled](#input\_peering\_enabled) | peering\_enabled in true  for  resource to be created. | `bool` | `true` | no |
+| <a name="input_repository"></a> [repository](#input\_repository) | Terraform current module repo | `string` | `"https://github.com/cypik/terraform-google-vpc-peering"` | no |
 | <a name="input_stack_type"></a> [stack\_type](#input\_stack\_type) | Which IP version(s) of traffic and routes are allowed to be imported or exported between peer networks. Possible values: ["IPV4\_ONLY", "IPV4\_IPV6"]. | `string` | `"IPV4_ONLY"` | no |
 | <a name="input_vpc_1_name"></a> [vpc\_1\_name](#input\_vpc\_1\_name) | The name of the virtual network. Changing this forces a new resource to be created. | `string` | `""` | no |
 | <a name="input_vpc_2_name"></a> [vpc\_2\_name](#input\_vpc\_2\_name) | The name of the virtual network. Changing this forces a new resource to be created. | `string` | `""` | no |
